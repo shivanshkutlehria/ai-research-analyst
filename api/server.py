@@ -11,7 +11,6 @@ from core.retriever import list_ingested_papers
 
 app = FastAPI(title="AI Research Analyst API")
 
-# Allow frontend to talk to backend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,7 +18,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# In-memory chat history store per paper
 chat_histories = {}
 
 
