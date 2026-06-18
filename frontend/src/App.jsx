@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react"
+import { Toast, useToast } from "./Toast"
 import axios from "axios"
 
 const API = "http://localhost:8000"
@@ -109,6 +110,7 @@ function SuggestionChip({ text, onClick }) {
 }
 
 export default function App() {
+  const { toast, showToast, hideToast } = useToast()
   const [papers, setPapers] = useState([])
   const [selectedPaper, setSelectedPaper] = useState(null)
   const [messages, setMessages] = useState([])
@@ -131,13 +133,13 @@ export default function App() {
     try {
       const res = await axios.get(`${API}/papers`)
       setPapers(res.data.papers)
-    } catch (e) {}
+    } catch (e) { }
     setLoadingPapers(false)
   }
 
   async function uploadPaper(file) {
     if (!file || !file.name.endsWith(".pdf")) {
-      alert("Please upload a PDF file.")
+      showToast(`"${res.data.filename}" ingested successfully!`, "success")
       return
     }
     setUploading(true)
@@ -152,7 +154,7 @@ export default function App() {
         text: `✓ "${res.data.filename}" ingested successfully.`
       }])
     } catch (e) {
-      alert("Upload failed. Make sure the backend is running.")
+      showToast("Upload failed. Make sure the backend is running.", "error")
     }
     setUploading(false)
   }
@@ -192,6 +194,10 @@ export default function App() {
   return (
     <>
       <style>{`
+        @keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
         @keyframes shimmer {
           0% { background-position: 200% 0; }
           100% { background-position: -200% 0; }
@@ -447,6 +453,7 @@ export default function App() {
           </div>
         </div>
       </div>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={hideToast} />}
     </>
   )
 }
