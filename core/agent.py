@@ -1,6 +1,6 @@
 from typing import TypedDict, Annotated
 from langgraph.graph import StateGraph, END
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_core.documents import Document
 from langchain_core.messages import AIMessage, HumanMessage
 from core.retriever import retrieve_chunks, format_context
@@ -28,10 +28,9 @@ class AgentState(TypedDict):
 
 # ── LLM setup ─────────────────────────────────────────────────────────────────
 
-llm = ChatGoogleGenerativeAI(
-    model=GEMINI_MODEL,
-    temperature=0,
-    convert_system_message_to_human=True,
+llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0
 )
 
 
