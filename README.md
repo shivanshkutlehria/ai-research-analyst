@@ -1,3 +1,12 @@
+---
+title: AI Research Analyst
+emoji: 🔬
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
 # Academic Paper Q&A Agent
 
 A stateful AI Research Assistant designed to navigate complex academic literature and extract precise insights. Utilizing a layout-aware Retrieval-Augmented Generation (RAG) pipeline, the agent delivers grounded, hallucination-free answers backed by page-level citations.
