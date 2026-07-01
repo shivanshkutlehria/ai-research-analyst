@@ -137,7 +137,7 @@ export default function App() {
     setLoadingPapers(false)
   }
 
-  async function uploadPaper(file) {
+  /*async function uploadPaper(file) {
     if (!file || !file.name.endsWith(".pdf")) {
       showToast(`"${res.data.filename}" ingested successfully!`, "success")
       return
@@ -157,7 +157,33 @@ export default function App() {
       showToast("Upload failed. Make sure the backend is running.", "error")
     }
     setUploading(false)
-  }
+  }*/
+
+    async function uploadPaper(file) {
+      if (!file || !file.name.endsWith(".pdf")) {
+        showToast("Please upload a PDF file.", "error")
+        return
+      }
+      setUploading(true)
+      const form = new FormData()
+      form.append("file", file)
+      try {
+        const res = await axios.post(`${API}/ingest`, form, {
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+        await fetchPapers()
+        setSelectedPaper(res.data.paper_id)
+        showToast(`"${res.data.filename}" ingested successfully!`, "success")
+        setMessages([{
+          role: "system",
+          text: `✓ "${res.data.filename}" ingested. Start asking questions.`
+        }])
+      } catch (e) {
+        console.error("Upload error:", e)
+        showToast(e?.response?.data?.detail || "Upload failed.", "error")
+      }
+      setUploading(false)
+    }
 
   async function sendQuestion(q) {
     const text = (q || question).trim()
