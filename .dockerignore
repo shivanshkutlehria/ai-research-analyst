@@ -1,0 +1,9 @@
+.venv
+.git
+__pycache__
+*.py[oc]
+.env
+db/
+papers/
+frontend/node_modules
+_hf_master_check

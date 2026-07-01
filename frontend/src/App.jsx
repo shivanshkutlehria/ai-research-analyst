@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { Toast, useToast } from "./Toast"
 import axios from "axios"
 
-const API = "http://localhost:8000"
+const API = "https://shivanshkutlehria-ai-research-analyst.hf.space/"
 
 function SkeletonMessage() {
   return (
