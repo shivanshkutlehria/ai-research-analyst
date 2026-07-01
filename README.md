@@ -22,7 +22,7 @@ A stateful AI Research Assistant designed to navigate complex academic literatur
 ## Tech Stack
 
 - Orchestration: LangGraph, LangChain Community
-- LLM Engine: Google Gemini 2.5 Flash (via Google AI Studio)
+- LLM Engine: Meta Llama 3.3 with Groq cloud
 - Embedding Model: Google Text Embeddings (models/embedding-001)
 - Vector Store: ChromaDB
 - Document Parsing: PyMuPDF (fitz)
