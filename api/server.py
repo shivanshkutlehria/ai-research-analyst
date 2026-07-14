@@ -5,9 +5,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 
+print("Starting app...")
+
+print("Importing ingest...")
 from core.ingest import ingest_paper
+
+print("Importing agent...")
 from core.agent import ask
+
+print("Importing retriever...")
 from core.retriever import list_ingested_papers
+
+print("Imports complete.")
 
 app = FastAPI(title="AI Research Analyst API")
 
